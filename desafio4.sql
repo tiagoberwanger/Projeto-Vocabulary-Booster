@@ -1,0 +1,12 @@
+SELECT JOB_TITLE AS 'Cargo',
+ROUND(AVG(SALARY), 2) AS 'Média salarial',
+CASE
+WHEN ROUND(AVG(SALARY), 2) BETWEEN 2000.00 and 5800.00 THEN "Júnior"
+WHEN ROUND(AVG(SALARY), 2) BETWEEN 5801.00 and 7500.00 THEN "Pleno"
+WHEN ROUND(AVG(SALARY), 2) BETWEEN 7501.00 and 10500.00 THEN "Sênior"
+WHEN ROUND(AVG(SALARY), 2) > 10500.00 THEN "CEO"
+END AS "Senioridade"
+FROM hr.jobs, hr.employees
+WHERE hr.jobs.JOB_ID = hr.employees.JOB_ID
+GROUP BY Cargo
+ORDER BY `Média salarial`, Cargo;
